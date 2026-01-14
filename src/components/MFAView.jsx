@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { styles } from '../styles';
+import { styles } from '../styles'
+import Logo from './Monzo-Logo.jpg';
 
 const MFAView = ({ otp, userEmail, inputVal, setInputVal, onVerify, onResend, error, isLoading }) => {
   // TIMERS: Used for Rate Limiting and Session Expiry
@@ -21,8 +22,15 @@ const MFAView = ({ otp, userEmail, inputVal, setInputVal, onVerify, onResend, er
   };
 
   return (
-    <div>
-      <h2 style={styles.header}>Verify It's You</h2>
+        <div>
+          {/* Monzo Logo for brand consistency */}
+          <img 
+            src={Logo}
+            alt="Monzo Logo" 
+            style={styles.logo} 
+          />
+          
+          <h2 style={styles.header}>Verify It's You</h2>
       <p style={{ fontSize: '14px', color: '#555' }}>
         Code sent to: <strong>{userEmail}</strong>
       </p>
