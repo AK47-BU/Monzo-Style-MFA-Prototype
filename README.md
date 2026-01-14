@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+🏦 Monzo-Style MFA Prototype
+This project is a React-based implementation of a Multi-Factor Authentication (MFA) system designed to mitigate Credential Harvesting and Brute Force attacks. It features a real-time email integration using EmailJS to send 6-digit verification codes.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+🔐 Security Features
+Identity Hardening: Requires a verified email address and a time-sensitive 6-digit OTP.
 
-## Available Scripts
+Risk Mitigation: Automatically locks the account after 3 failed attempts to prevent automated brute-force scripts.
 
-In the project directory, you can run:
+Rate Limiting: Implements a 30-second mandatory cooldown period when an account is locked.
 
-### `npm start`
+Secure Configuration: Uses environment variables (.env) to prevent API credential leakage in public repositories.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+🛠️ Setup Instructions
+To run this project locally, you will need to provide your own EmailJS credentials.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Clone the repository:
 
-### `npm test`
+Bash
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+git clone <your-repo-url>
+cd monzo-verify
+Install dependencies:
 
-### `npm run build`
+Bash
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+npm install
+Configure Environment Variables: Create a file named .env in the root directory and add the following (replacing the placeholders with your EmailJS details):
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Plaintext
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+REACT_APP_EMAILJS_SERVICE_ID=your_service_id
+REACT_APP_EMAILJS_TEMPLATE_ID=your_template_id
+REACT_APP_EMAILJS_PUBLIC_KEY=your_public_key
+Start the app:
 
-### `npm run eject`
+Bash
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+npm start
+🧪 Testing the Prototype
+Happy Path: Enter a valid email, receive the code, and enter it correctly to access the dashboard.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Negative Test: Enter an incorrect code 3 times to trigger the "Account Locked" state.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Timer Test: Observe the "Resend Code" button cooldown and the OTP expiry timer in the MFA view.
